@@ -40,7 +40,8 @@ class App extends React.Component {
         <p>humidity: {post.humidity}</p>
         <p>luminosity: {post.luminosity}</p>
         <p>temperature: {post.temperature}</p>
-    <p>time: {new Date(parseInt(post.date)).getHours()}:{new Date(parseInt(post.date)).getMinutes()}</p>
+        <p>time: {new Date(parseInt(post.date)).getHours()}:{new Date(parseInt(post.date)).getMinutes()}</p>
+        <p>{post.mex}</p>
       </div>
     ));
   };

@@ -7,6 +7,7 @@ const valuesPostSchema = new Schema({
     temperature: String,
     humidity: String,
     luminosity: String,
+    mex: String,
     date: {
         type: String,
         default: Date.now()
