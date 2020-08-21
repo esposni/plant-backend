@@ -2,15 +2,15 @@ const express = require('express');
 
 const router = express.Router();
 
-const BlogPost = require('../models/blogPost');
+const valuesPost = require('../models/valuesPost');
 
 
 // Routes
 router.get('/', (req, res) => {
 
-    BlogPost.find({  })
+    valuesPost.find({  })
         .then((data) => {
-            console.log('Data: ', data);
+            // console.log('Data: ', data);
             res.json(data);
         })
         .catch((error) => {
@@ -21,27 +21,37 @@ router.get('/', (req, res) => {
 router.post('/save', (req, res) => {
     const data = req.body;
 
-    const newBlogPost = new BlogPost(data);
-
-    newBlogPost.save((error) => {
-        if (error) {
-            res.status(500).json({ msg: 'Sorry, internal server errors' });
-            return;
-        }
-        // BlogPost
-        return res.json({
-            msg: 'Your data has been saved!!!!!!'
+    const newValuesPost = new valuesPost(data);
+    valuesPost.remove({  }).then((data) => {
+        newValuesPost.save((error) => {
+            if (error) {
+                res.status(500).json({ msg: 'Sorry, internal server errors' });
+                return;
+            }
+            
+            return res.json({
+                msg: 'Your data has been saved!!!!!!'
+            });
         });
+    })
+    .catch((error) => {
+        console.log('error: ', daerrorta);
     });
+    
+    
 });
 
-
-router.get('/name', (req, res) => {
-    const data =  {
-        username: 'peterson',
-        age: 5
-    };
-    res.json(data);
+router.delete('/delete', (req, res) => {
+    valuesPost.remove({  })
+    .then((data) => {
+        // console.log('Remove: ', data);
+        res.json({
+            msg: "Remove"
+        });
+    })
+    .catch((error) => {
+        console.log('error: ', daerrorta);
+    });
 });
 
 
