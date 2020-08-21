@@ -11,7 +11,7 @@ const config = require('./config');
 
 
 // mongod --config /usr/local/etc/mongod.conf
-mongoose.connect(config.mongoUrl+config.mongoDbName,{useNewUrlParser: true , useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URI||(config.mongoUrl+config.mongoDbName),{useNewUrlParser: true , useUnifiedTopology: true});
 //configure app
 app.use(logger('dev')); 
 
