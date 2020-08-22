@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 8080;
 const routes = require('./routes/api');
 
 // run mongod local server -->  mongod --config /usr/local/etc/mongod.conf
+// npm start
+// npm run-script client
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/plant_iot', {
     useNewUrlParser: true,
@@ -23,6 +25,10 @@ mongoose.connection.on('connected', () => {
 // Data parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
